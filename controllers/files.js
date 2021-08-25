@@ -11,7 +11,7 @@ export const getFile = async (req, res) => {
       // 從主機取得圖片後，再回傳
       const imgres = await axios({
         method: 'GET',
-        url: `http://${process.env.FTP_HOST}/${process.env.FTP_USER}/專題/${req.params.file}`,
+        url: `http://${process.env.FTP_HOST}/${process.env.FTP_USER}/%e5%b0%88%e9%a1%8c/${req.params.file}`,
         responseType: 'stream'
       })
       imgres.data.pipe(res)
