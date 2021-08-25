@@ -21,7 +21,7 @@ app.use(cors({
     if (process.env.DEV === 'true') {
       callback(null, true)
     } else {
-      if (origin !== undefined || origin.includes('github')) {
+      if (origin === undefined || origin.includes('github')) {
         callback(null, true)
       } else {
         callback(new Error('Not allowed'), false)
@@ -29,6 +29,11 @@ app.use(cors({
     }
   }
 }))
+
+// 處理 cors 錯誤
+app.use((_, req, res, next) => {
+  res.status(403).send({ success: false, message: '請求被拒絕' })
+})
 
 app.use(bodyParser.json())
 
